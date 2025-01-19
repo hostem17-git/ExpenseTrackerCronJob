@@ -12,7 +12,7 @@ export const updateDatabase = async()=>{
             return;
         }
     
-        const categories = await chatgptService.getCategories(data);
+        const categories = await chatgptService.requestCategories(data);
     
         const result = await categoryRepository.updateCategories(categories);
         console.log("Updated categories",result);   
