@@ -38,10 +38,10 @@ class categoryRepository {
                 `;
     
             const values = [data[id], id];
-    
+
             const result = await client.query(query, values);
 
-            console.log('Updated category for id:', result.rows[0].id);
+            console.log(`Updated category for id : ${id}, ${result.rowCount} rows affected`);
       }
 
       await client.query("COMMIT");
