@@ -4,6 +4,11 @@ import jsonCleanerAdapter from "../adapter/jsonCleaner.adapter.js";
 
 export const updateDatabase = async (req, res) => {
   try {
+
+    res.status(200).json({
+      message: "Database update initiated",
+    });
+
     console.log("Initiating updateCategories");
 
     const data = await categoryRepository.readPendingRows();
@@ -20,14 +25,8 @@ export const updateDatabase = async (req, res) => {
     await categoryRepository.updateCategories(cleanedCategories);
     console.log("updateCategories completed");
     
-    res.status(200).json({
-      message: "Database updated successfully",
-    });
+   
   } catch (error) {
     console.log("Error updating database", error);
-    res.status(500).json({
-      message: "Error updating database",
-      error,
-    });
   }
 };
