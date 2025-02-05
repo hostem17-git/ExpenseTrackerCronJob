@@ -6,7 +6,7 @@ export const updateDatabase = async (req, res) => {
   try {
 
     res.status(200).json({
-      message: "Database update initiated",
+      message: "Ok",
     });
 
     console.log("Initiating updateCategories");
