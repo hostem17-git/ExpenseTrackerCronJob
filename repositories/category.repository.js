@@ -9,7 +9,8 @@ class categoryRepository {
             SELECT 
             id,expense
             FROM expenses
-            WHERE category  = 'Categorization pending'
+            WHERE primarycategory  = 'Categorization pending' OR secondarycategory = 'Categorization pending'
+            LIMIT 50
             `;
 
       const result = await pool.query(query);
@@ -33,11 +34,12 @@ class categoryRepository {
       for(const id of Object.keys(data)){
             const query = `
                 UPDATE expenses
-                SET category = $1
-                WHERE id = $2
+                SET primarycategory = $1, secondarycategory = $2
+                WHERE id = $3
                 `;
     
-            const values = [data[id], id];
+            const values = [data[id].primarycategory,data[id].secondarycategory, id];
+
 
             const result = await client.query(query, values);
 

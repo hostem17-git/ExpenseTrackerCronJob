@@ -4,6 +4,9 @@ dotenv.config();
 
 const API_KEY = process.env.OPENAI_API_KEY;
 
+const primaryCategories = ["Essential Expenses","Financial & Savings","Lifestyle & Leisure","Family & Personal","Business & Work","Miscellaneous"];
+
+const secondaryCategories = ["Housing","Food & Groceries","Transportation","Healthcare","Insurance","Savings & Investments","Debt Payments","Entertainment","Shopping","Hobbies","Education","Gifts & Donations","Childcare","Pet Expenses","Office Expenses","Freelance/Side Business","Travel","Taxes","Miscellaneous"]
 class chatgptService{
 
     requestCategories = async (expenses) => {
@@ -16,7 +19,7 @@ class chatgptService{
     
         const data = {
             model: 'gpt-4o-mini',                                     
-            messages: [{ role: 'user', content: `Please give me categories for each of these expenses: ${JSON.stringify(expenses)} . Make sure to return only the id and category as a json object. Do not return anything apart from the json object` }],      
+            messages: [{ role: 'user', content: `Please give me categories for each of these expenses: ${JSON.stringify(expenses)} with primary category out of ${primaryCategories.join(", ")}  and secondary category out of ${secondaryCategories.join(", ")}. Make sure to return only the id, primary category as "primarycategory" and secondary category as "secondarycategory" as a json object. Do not return anything apart from the json object` }],      
             max_tokens: 15000,                                    
             temperature: 0.7                                     
         };

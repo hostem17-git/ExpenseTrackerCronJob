@@ -1,21 +1,22 @@
-
-
 class jsonCleanerAdapter {
   clean(json) {
-    console.log("----------------")
-    // console.log("length",JSON.);
-    console.log("json",json);
-    console.log("type",typeof(json));
-    let cleanedJson = {};
-    if(Array.isArray(json)){
-      json.forEach(item => {
-        cleanedJson[item.id] = item.category;
-      });
-    }else{
-      cleanedJson[json.id] = json.category;
+    try {
+      let cleanedJson = {};
+      if (Array.isArray(json)) {
+        json.forEach((item) => {
+          cleanedJson[item.id] = {
+            primarycategory: item.primarycategory,
+            secondarycategory: item.secondarycategory,
+          };
+        });
+      } else {
+        cleanedJson[json.id] = json.category;
+      }
+      return cleanedJson;
+    } catch (error) {
+      console.log("Error cleaning json", error);
     }
-    return cleanedJson;
   }
 }
 
-export default  new jsonCleanerAdapter();
+export default new jsonCleanerAdapter();
